@@ -126,7 +126,8 @@
 * abstract class와 implements
   * abstract class는 추상 클래스로 정의만 하고 구현은 하지 않는다. 즉, 인스턴스화 할 수 없다.
   * implements를 통해서 abstrcat class를 상속 받아 정의된 메서드나 프로퍼티를 구현해 사용한다.
-  * 예제 코드를 살펴보자.
+  * 혹은 extends를 통해 상속 받아 의무적으로 재정의해야하는 추상 함수만 재정의할 수 있다.
+  * 예제 코드를 살펴보자. ( implements )
     ```dart
     abstract class Animal {
         void makeSound();
