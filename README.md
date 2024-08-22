@@ -15,3 +15,4 @@
 **Dart**
 * [[2024.8.20] 변수와 타입](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/variable_and_type.md)
 * [[2024.8.21] 함수와 에러 핸들링](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/function_and_error_handling.md)
+* * [[2024.8.22] 클래스](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/class.md)
