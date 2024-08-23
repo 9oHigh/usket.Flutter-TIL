@@ -99,48 +99,48 @@
     }
   }
   ```
-  * 만약 다중 상속을 원한다면 with 키워드를 사용하면 된다.
+  * 만약 다중 상속과 같은 특성을 원한다면 with 키워드를 사용하면 된다.
     ```dart
     class A extends B with C, D {
         // 생략
     }
     ```
-* Mixin
-  * 여러 클래스에 공통 기능을 추가할 때 사용할 수 있고, 이를 통해서 다중 상속의 문제를 피할 수 있다.
-  * 예제를 통해 알아보자.
-    ```dart
-    mixin Runner {
-        void run() {
-            print("Running fast!");
-        }
-    }
+  * 혹은 Mixin을 사용할 수 있다.
+    * 여러 클래스에 공통 기능을 추가할 때 사용할 수 있고, 이를 통해서 다중 상속의 문제를 피할 수 있다.
+    * 예제를 통해 알아보자.
+      ```dart
+      mixin Runner {
+          void run() {
+              print("Running fast!");
+          }
+      }
 
-    mixin Swimmer {
-        void swim() {
-            print("Swimming smoothly!");
-        }
-    }
+      mixin Swimmer {
+          void swim() {
+              print("Swimming smoothly!");
+          }
+      }
 
-    class Person {
-        String name;
+      class Person {
+          String name;
 
-        Person(this.name);
-    }
+          Person(this.name);
+      }
 
-    class Athlete extends Person with Runner, Swimmer {
-        Athlete(String name) : super(name);
+      class Athlete extends Person with Runner, Swimmer {
+          Athlete(String name) : super(name);
 
-        void showSkills() {
-            run();
-            swim();
-        }
-    }
+          void showSkills() {
+              run();
+              swim();
+          }
+      }
 
-    Athlete athlete = Athlete("John");
-    athlete.showSkills();   
-    // Running fast!
-    // Swimming smoothly!
-    ```
+      Athlete athlete = Athlete("John");
+      athlete.showSkills();   
+      // Running fast!
+      // Swimming smoothly!
+      ```
 * abstract class와 implements
   * abstract class는 추상 클래스로 정의만 하고 구현은 하지 않는다. 즉, 인스턴스화 할 수 없다.
   * implements를 통해서 abstrcat class를 상속 받아 정의된 메서드나 프로퍼티를 구현해 사용한다.
