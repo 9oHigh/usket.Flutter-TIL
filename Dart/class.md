@@ -10,6 +10,24 @@
     }
     ```
     * 축약된 형태의 생성자
+* 초기화 리스트
+  * 생성자가 Body를 실행하기 이전에 인스턴스 변수를 초기화하고자 할 떄 사용한다. 특히, final과 같은 상수 생성자를 초기화 할 때 많이 사용된다.
+    ```dart
+    class Person {
+        final String name;
+        final int age;
+
+        Person(String name, int age): name = name + "님", age = age - 1;
+    }
+    ```
+  * Super의 형태로 부모 클래스를 초기화할 수도 있다.
+    ```dart
+    class Jane extends Person {
+        final String hobby;
+        Jane(String name, int age, this.hobby): super(name, age);
+    }
+    ```
+  * Flutter 에서는 위젯을 처음 생성할 때, 부모 위젯 클래스에 키값을 초기화하는 패턴을 제공하는데 초기화 리스트는 이 패턴 이외에는 잘 사용되지 않는다.
 * 접근 제어자
   * Private와 Public 두 가지만 존재한다.
     ```dart
