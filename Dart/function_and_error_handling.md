@@ -1,4 +1,4 @@
-# 정리
+# Function and Error Handling
 ### 1. Function
 ### Basic Format
 

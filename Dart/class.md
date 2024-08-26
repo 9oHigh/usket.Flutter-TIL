@@ -1,5 +1,4 @@
-# 정리
-### Class
+# Class
 * 생성자
     ```dart
     class Person {

@@ -13,6 +13,8 @@
 ## 분류
 
 **Dart**
-* [[2024.8.20] 변수와 타입](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/variable_and_type.md)
-* [[2024.8.21] 함수와 에러 핸들링](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/function_and_error_handling.md)
-* [[2024.8.22] 클래스](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/class.md)
+* [[2024.8.20] Variable and Type](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/variable_and_type.md)
+* [[2024.8.21] Function and Error Handling](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/function_and_error_handling.md)
+* [[2024.8.22] Class](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/class.md)
+* [[2024.8.26] Enum](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/enum.md)
+* [[2024.8.26] Sealed Class](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/Dart/enum.md)
