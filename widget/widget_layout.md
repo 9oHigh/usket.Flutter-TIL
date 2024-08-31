@@ -58,7 +58,9 @@
         )
     ```
 * Aligning widgets
-![alt text](https://velog.velcdn.com/images/sucream/post/0c162cca-01bf-4e87-a2e9-7acfb03a6fe5/image.png)
+
+    ![alt text](https://velog.velcdn.com/images/sucream/post/0c162cca-01bf-4e87-a2e9-7acfb03a6fe5/image.png)
+
   * 위와 같이 Row, Column 등 정렬을 지정할 수 있는 위젯들은 Main, Cross Axis를 지정할 수 있으며 자신의 Children이 배치되는 방향을 Main Axis로 생각하면 된다.
   * 종류
     * Start: Main Axis의 시작 지점을 기준으로 정렬한다.
@@ -68,7 +70,7 @@
     * SpaceAround: 첫 번째 위젯과 마지막 위젯의 끝과의 간격을 children 상이의 공간의 절반으로 배치한다.
     * SpaceEvenly: Children 사이의 공간을 모두 동일하게 배분해 정렬한다.
     * Space 정렬 이미지
-       ![alt text](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FUi4pY%2Fbtqz7omPMo2%2FJQLXhUo42USHCnZjCVPkL0%2Fimg.png)
+        ![alt text](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FUi4pY%2Fbtqz7omPMo2%2FJQLXhUo42USHCnZjCVPkL0%2Fimg.png)
 
 ### Sizing widgets
   * Expanded
@@ -77,7 +79,7 @@
   * 예시 코드
     <table style="width: 700px; table-layout: fixed;">
         <tr>
-        <td style="width: 50%; vertical-align: top;"> 
+        <td style="width: 70%; vertical-align: top;"> 
     <pre>
 
     ```dart
