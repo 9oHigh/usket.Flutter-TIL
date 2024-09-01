@@ -78,31 +78,31 @@
     * 상위의 Main Axis 를 기준으로 자식을 늘려 채워주게 되는데, 여러개의 Expanded가 존재할 경우, flex 속성을 통해서 하위 위젯들의 비율을 정할 수 있다.
   * 예시 코드
     <table style="width: 700px; table-layout: fixed;">
-        <tr>
-        <td style="width: 70%; vertical-align: top;"> 
+    <tr>
+    <td style="width: 70%; vertical-align: top;"> 
     <pre>
 
     ```dart
-    Row(
-        children: <Widget>[
-            Expanded(
-                child: Container(
-                    color: Colors.red,
+        Row(
+            children: <Widget>[
+                Expanded(
+                    child: Container(
+                        color: Colors.red,
+                    ),
                 ),
-            ),
-            Expanded(
-                child: Container(
-                    color: Colors.amber,
+                Expanded(
+                    child: Container(
+                        color: Colors.amber,
+                    ),
                 ),
-            ),
-        ],
-    ),
+            ],
+        ),
     ```
 
     </pre>
     </td>
     <td style="width: 30%; padding: 10px; vertical-align: top;">
-        <img src="https://velog.velcdn.com/images/ksk0605/post/b72d98e8-6860-4356-8fa6-c66988d53ba4/image.png" style="max-width: 72%;">
+        <img src="https://velog.velcdn.com/images/ksk0605/post/b72d98e8-6860-4356-8fa6-c66988d53ba4/image.png" style="max-width: 90%;">
     </td>
     </tr>
     </table>
