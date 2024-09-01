@@ -77,10 +77,10 @@
     * 하위 위젯을 상위에 확장하여 채워주는 위젯으로, Column, Row, Flex 만 상위 위젯이 될 수 있다. 다시 말해, 축이 있는 위젯에서만 사용이 가능하다는 것이다.
     * 상위의 Main Axis 를 기준으로 자식을 늘려 채워주게 되는데, 여러개의 Expanded가 존재할 경우, flex 속성을 통해서 하위 위젯들의 비율을 정할 수 있다.
   * 예시 코드
-    <table style="width: 700px; table-layout: fixed;">
+    <table style="width: 100%; table-layout: fixed;">
     <tr>
     <td style="width: 70%; vertical-align: top;"> 
-    <pre>
+    <pre style="overflow-x: auto; white-space: pre-wrap;">
 
     ```dart
         Row(
@@ -102,10 +102,11 @@
     </pre>
     </td>
     <td style="width: 30%; padding: 10px; vertical-align: top;">
-        <img src="https://velog.velcdn.com/images/ksk0605/post/b72d98e8-6860-4356-8fa6-c66988d53ba4/image.png" style="max-width: 90%;">
+        <img src="https://velog.velcdn.com/images/ksk0605/post/b72d98e8-6860-4356-8fa6-c66988d53ba4/image.png" style="width: 100%;">
     </td>
     </tr>
-    </table>
+</table>
+
 
 ### Packing widgets
 * mainAxisSize
