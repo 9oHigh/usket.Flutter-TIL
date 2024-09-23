@@ -82,3 +82,127 @@
     // myName
     // Completed
     ```
+* Stream
+  * 비동기 이벤트의 시퀀스로 비동기 Iterable이라고 생각하면 된다.
+  * 이벤트 수신
+    * for을 사용
+      * await 키워드와 함께 사용해 데이터들을 비동기적으로 처리할 수 있다.
+        ```dart
+        Future<int> sumStream(Stream<int> stream) async {
+            int sum = 0;
+            await for (var value in stream) {
+                sum += value;
+            }
+            return sum;
+        }
+
+        ```
+  * 구독
+    * listen 키워드를 이용해 스트림을 구독하고 이벤트를 처리할 수 있다.
+        ```dart
+        Stream<int> stream = Stream.periodic(Duration(seconds: 1), (count) => count + 1).take(4);
+
+        stream.listen((data) {
+            print('Data: $data');
+        });
+        ```
+    * 기본적으로 모두 Sigle-subscription이므로, 한 번에 하나의 리스너만 허용한다. 즉, 한 번 구독되면 Stream이 완료될 때까지 다른 리스너가 구독할 수 없다.
+
+  * StreamSubscription
+    * listen 메서드의 반환 값이 StreamSubscription이다.
+    * 스트림의 구독을 취소, 정지, 재개, 처리 작업을 할 수 있다.
+    * 예시 코드
+        ```dart
+        Stream<int> stream = Stream.periodic(Duration(seconds: 1), (count) => count + 1).take(100);
+
+        StreamSubscription<int> mySubscription = stream.listen((data) {
+                print('Data: $data');
+            },
+            onDone: () => print("Stream completed")
+        );
+
+        Future.delayed(Duration(seconds: 3), () {
+            mySubscription.pause(); // 3초 뒤에 정지
+
+            Future.delayed(Duration(seconds: 3), () {
+                mySubscription.resume(); // 다시 3초 뒤에 재개
+
+                Future.delayed(Duration(seconds: 3), () {
+                    mySubscription.cacel(); // 다시 3초 뒤에 취소
+                });
+            });
+        });
+        ```
+  * Stream 변환하기
+    * 기존 Stream의 이벤트를 기반으로 새로운 Stream을 만들어 사용할 수 있다. 대표적으로 map, where, asyncExpand를 사용할 수 있다.
+    * map
+      * 이름 그대로 요소들을 변환하거나 조작하는 등 매핑해 사용하는 메서드로 각각의 요소들을 변환하여 새로운 컬렉션을 반환한다.
+        ```dart
+        Stream<int> stream = Stream.periodic(Duration(seconds: 1), (count) => count + 1).take(100);
+
+        stream.map((data) => data * 2).listen((data) {
+            print("Mapped Data: $data");
+        });
+        ```
+    * where
+      * 컬렉션의 요소 중에서 특정 조건에 부합하는 요소들만 필터링하여 새로운 컬렉션을 반환하는데 사용한다.
+        ```dart
+         Stream<int> stream = Stream.periodic(Duration(seconds: 1), (count) => count + 1).take(100);
+
+        stream.where((data) => data % 2 == 0).listen((data) {
+            print("Filtered Data: $data");
+        });
+        ```
+    * asyncExpand
+      * 각 요소들을 비동기적으로 처리하여 여러 개의 요소를 생성할 수 있는 스트림으로 확장할 수 있다. 
+
+* 제너레이터
+  * Stream을 생성하는데 사용된다.
+    * Synchronous generator, sync*
+      * sync* 키워드로 정의하고, Iterator를 반환한다.
+      * 예시
+        ```dart
+        Iterable<int> generateNumbers(int maxValue) sync* {
+            for (int i = 0; i <= maxValue; i++) {
+                yield i; // 함수 내에서 값을 반환할 때 사용한다.
+            }
+        }
+
+        Iterable<int> myNumbers = generateNumbers(4);
+
+        for (int num in myNumbers) {
+            print(num); // 0, 1, 2, 3, 4
+        }
+        ```
+    * Asynchronous generator, async*
+      * async* 키워드로 정의하고, Stream을 반환한다.
+      * 예시
+        ```dart
+        Stream<int> generateNumbers(int maxValue) async* {
+            for (int i = 0; i <= maxValue; i++) {
+                await Future.delayed(Duration(seconds: 1));
+                yield i;
+            }
+        }
+
+        Stream<int> myNumbers = generateNumbers(4);
+
+        for (int num in myNumbers) {
+            print(num); // 0, 1, 2, 3, 4 ( 1초 간격으로 )
+        }
+        ```
+    * yield*
+      * 다른 제너레이터를 위임할 때 사용한다.
+      * 예시
+        ```dart
+        Iterable<int> generateNumbers(int maxValue) sync* {
+            for (int i = 0; i <= maxValue; i++) {
+                yield i; // 함수 내에서 값을 반환할 때 사용한다.
+            }
+        }
+
+        Iterable<int> addNumber(int maxValue) sync* {
+            yield* generateNumbers(maxValue);
+            yield maxValue + 1;
+        }
+        ```
