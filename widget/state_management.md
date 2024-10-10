@@ -108,3 +108,150 @@
 
    10. mounted is false
          * 이 상태에서는 state 객체가 다시 mount 되지 않으며, setState() 호출시 에러가 발생한다.
+
+### 상태관리에 유용한 라이브러리들
+* Provider
+  * 단순하고 효율적인 상태 관리를 제공한다.
+  * 구글에서 권장하는 상태 관리 패키지로 InheritedWidget을 기반으로 한 상태 관리 방법이다.
+    * 전역 상태를 관리하기 좋음
+    * InheritedWidget
+      * 위젯 트리 내에서 데이터를 효율적으로 전달하기 위해 사용되는 클래스로, 일반적으로 위젯 트리의 상위에서 하위로 상태나 데이터를 전달하는데 사용되며, 하위 위젯이 상위 위젯의 상태가 변경될 때만 다시 빌드되도록 해준다.
+      * 특징
+        * 트리 구조 위쪽에 있는 위젯들이 하위 위젯들에 데이터를 전달할 수 있음
+        * 데이터가 변경되면 그 데이터를 참조하는 하위 위젯만 다시 빌드
+        * 일반적으로 직접 사용하기 보다는 상속받는 클래스를 만들어 사용
+      * 예시 코드
+        ```dart
+        // InheritedWidget을 상속받아 구현
+        class MyInheritedWidget extends InheritedWidget {
+          final int count;
+          final Widget child;
+
+          MyInheritedWidget({required this.count, required this.child}) : super(child: child);
+
+          // 데이터를 참조하는 위젯이 변경되었는지 확인하는 메서드
+          @override
+          bool updateShouldNotify(covariant MyInheritedWidget oldWidget) {
+            return count != oldWidget.count;
+          }
+
+          // 상위 위젯에서 InheritedWidget을 찾고 데이터를 가져오는 메서드
+          static MyInheritedWidget? of(BuildContext context) {
+            return context.dependOnInheritedWidgetOfExactType<MyInheritedWidget>();
+          }
+        }
+
+        class MyApp extends StatefulWidget {
+          @override
+          _MyAppState createState() => _MyAppState();
+        }
+
+        class _MyAppState extends State<MyApp> {
+          int _count = 0;
+
+          void _incrementCounter() {
+            setState(() {
+              _count++;
+            });
+          }
+
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              home: Scaffold(
+                appBar: AppBar(title: Text('InheritedWidget')),
+                body: MyInheritedWidget(
+                  count: _count,
+                  child: CounterDisplay(),
+                ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: _incrementCounter,
+                  child: Icon(Icons.add),
+                ),
+              ),
+            );
+          }
+        }
+
+        class CounterDisplay extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            // InheritedWidget에서 count 데이터를 가져와 사용
+            final int count = MyInheritedWidget.of(context)?.count ?? 0;
+            return Center(
+              child: Text(
+                'Count: $count',
+                style: TextStyle(fontSize: 24),
+              ),
+            );
+          }
+        }
+        ```
+  * 특징
+    * 의존성 주입 - Provider는 특정 상태를 위젯 트리의 하위 위젯에 쉽게 전달할 수 있다.
+    * 자동 리빌드 - 상태가 변경되면, 해당 상태에 의존하는 위젯만 다시 빌드된다.
+    * 재사용 가능성 - 상태와 로직을 분리하여 더 재사용 가능하고 테스트 가능한 코드를 작성할 수 있따.
+  * 종류
+    * ChangeNotifierProvider: ChangeNotifier를 사용해 상태관리를 도와준다.
+    * Provider: 상태가 변경되지 않는 객체를 주입할 때 사용한다.
+    * FutureProvider: 비동기 작업을 처리하고 해당 결과를 상태로 관리할 경우, 사용한다.
+    * StreamProvider: 스트림을 사용하여 상태를 관리할 때 사용한다.
+  * 예시 코드
+    ```dart
+    import 'package:provider/provider.dart';
+
+    // ChangeNotifier를 상속받은 카운터 클래스
+    class Counter with ChangeNotifier {
+      int _count = 0;
+
+      int get count => _count;
+
+      void increment() {
+        _count++;
+        notifyListeners(); // 상태가 변경되었음을 알림
+      }
+    }
+
+    void main() {
+      runApp(
+        // ChangeNotifierProvider를 사용하여 Counter 클래스를 제공
+        ChangeNotifierProvider(
+          create: (context) => Counter(),
+          child: MyApp(),
+        ),
+      );
+    }
+
+    class MyApp extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          home: Scaffold(
+            appBar: AppBar(title: Text('Provider Example')),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('You have pushed the button this many times:'),
+                  // Consumer를 사용하여 상태에 반응하는 위젯을 만듦
+                  Consumer<Counter>(
+                    builder: (context, counter, child) {
+                      return Text(
+                        '${counter.count}',
+                        style: TextStyle(fontSize: 48),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            floatingActionButton: FloatingActionButton(
+              // 상태에 접근하여 카운트를 증가시키는 메서드 호출
+              onPressed: () => Provider.of<Counter>(context, listen: false).increment(),
+              child: Icon(Icons.add),
+            ),
+          ),
+        );
+      }
+    }
+    ```
