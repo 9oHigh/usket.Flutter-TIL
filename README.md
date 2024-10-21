@@ -31,7 +31,7 @@
 
 ### Database
 * [[2024.9.12] SharedPreference](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/database/shared_preferences.md)
-* 
+
 ### Network
 * [[2024.10.2] Http](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/network/http.md)
 * [[2024.10.3] Socket](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/network/socket.md)
