@@ -41,6 +41,7 @@
 * [[2024.10.21] Provider](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/StateManagement/provider.md)
 * [[2024.10.21] Riverpod](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/StateManagement/riverpod.md)
 * [[2024.10.22] BLoC](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/StateManagement/bloc.md)
+* [[2024.10.23] GetX](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/StateManagement/getx.md)
 
 ### Asynchronous Programming
 * [[2024.9.20] Asynchronous Programming](https://github.com/9oHigh/usket.Flutter-TIL/blob/main/AsynchronousProgramming/asynchronous_programming.md)
