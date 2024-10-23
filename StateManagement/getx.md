@@ -48,4 +48,61 @@
     * 단점
       * 과도한 사용 위험
         * 전역 상태 관리 기능을 무분별하게 사용하면 유지보수에 어려움을 겪을 수 있음
-    
+* 예제
+  * 버튼을 클릭하면 리스트에서 명언을 랜덤으로 가져와 보여주는 예제
+    ```dart
+    // GetX Controller 정의
+    class QuoteController extends GetxController {
+        final List<String> quotes = [
+            "인생은 우리가 다른 계획을 세우느라 바쁠 때 일어난다.",
+            "가장 큰 영광은 결코 넘어지지 않는 것이 아니라, 넘어질 때마다 다시 일어서는 것이다.",
+            "시작하려면 말을 멈추고 행동해야 한다.",
+            "당신의 시간은 한정되어 있으니, 남의 인생을 살며 낭비하지 마라.",
+            "삶이 예측 가능하다면, 더 이상 삶이 아니고 무의미할 것이다.",
+        ];
+
+        var currentQuote = ''.obs;
+
+        void getRandomQuote() {
+            final randomIndex = Random().nextInt(quotes.length);
+            currentQuote.value = quotes[randomIndex];
+        }
+    }
+
+    class QuoteScreen extends StatelessWidget {
+        const QuoteScreen({super.key});
+
+        @override
+        Widget build(BuildContext context) {
+            // GetX Controller 초기화
+            final QuoteController quoteController = Get.put(QuoteController());
+
+            return Scaffold(
+                appBar: AppBar(title: const Text("랜덤 명언 생성기")),
+                body: Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                            // 명언을 실시간으로 업데이트하는 텍스트
+                            Obx(() => Text(
+                                quoteController.currentQuote.value.isEmpty
+                                    ? '버튼을 눌러 명언을 확인해보세요!'
+                                    : quoteController.currentQuote.value,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontSize: 24),
+                                )),
+                            const SizedBox(height: 20),
+                            ElevatedButton(
+                                onPressed: () {
+                                    quoteController.getRandomQuote();
+                                },
+                                child: const Text('랜덤 명언 생성'),
+                            ),
+                        ],
+                    ),
+                ),
+            );
+        }
+    }
+
+    ```
