@@ -51,7 +51,7 @@
                     builder: (context, state) => const UserScreen(),
                     routes: <RouteBase>[
                         GoRoute(
-                            path: 'details',
+                            path: '/details',
                                 builder: (context, state) {
                                     final userInfo = state.extra as User;
                                     return UserDetailPage(userInfo: userInfo);
@@ -67,8 +67,8 @@
                 
                 @override
                 Widget build(BuildContext context) {
-                        // MaterialApp의 생성자를 통해서 config 처리
-                return MaterialApp.router(routerConfig: _router,);
+                    // MaterialApp의 생성자를 통해서 config 처리
+                    return MaterialApp.router(routerConfig: _router,);
                 }
             }
                 
